@@ -1,0 +1,100 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "A skill tracker and development tool",
+        "title": "Go Skill",
+        "termsOfService": "https://tos.santoshk.dev",
+        "contact": {
+            "name": "David Oheji",
+            "url": "https://twitter.com/ejedavy",
+            "email": "ejeohejidavid@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8000",
+    "basePath": "/",
+    "paths": {
+        "/skill/createSkill": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "skills"
+                ],
+                "parameters": [
+                    {
+                        "description": "Create Skill",
+                        "name": "CreateSkill",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.CreateSkillRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#/definitions/db.Skill"
+                        }
+                    },
+                    "400": {
+                        "description": "We require all fields",
+                        "schema": {
+                            "$ref": "#/definitions/api.ServerError"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "api.CreateSkillRequest": {
+            "type": "object",
+            "required": [
+                "learner",
+                "name"
+            ],
+            "properties": {
+                "learner": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.ServerError": {
+            "type": "object"
+        },
+        "db.Skill": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "learner": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "score": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}

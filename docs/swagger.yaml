@@ -1,0 +1,66 @@
+basePath: /
+definitions:
+  api.CreateSkillRequest:
+    properties:
+      learner:
+        type: string
+      name:
+        type: string
+    required:
+    - learner
+    - name
+    type: object
+  api.ServerError:
+    type: object
+  db.Skill:
+    properties:
+      createdAt:
+        type: string
+      id:
+        type: integer
+      learner:
+        type: string
+      name:
+        type: string
+      score:
+        type: integer
+    type: object
+host: localhost:8000
+info:
+  contact:
+    email: ejeohejidavid@gmail.com
+    name: David Oheji
+    url: https://twitter.com/ejedavy
+  description: A skill tracker and development tool
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://tos.santoshk.dev
+  title: Go Skill
+  version: "1.0"
+paths:
+  /skill/createSkill:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Create Skill
+        in: body
+        name: CreateSkill
+        required: true
+        schema:
+          $ref: '#/definitions/api.CreateSkillRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/db.Skill'
+        "400":
+          description: We require all fields
+          schema:
+            $ref: '#/definitions/api.ServerError'
+      tags:
+      - skills
+swagger: "2.0"
