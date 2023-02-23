@@ -3,7 +3,12 @@ package utils
 import (
 	"math/rand"
 	"strings"
+	"time"
 )
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
 
 var alphabets = []byte("abcdefghijklmnopqrstuvwxyz")
 
