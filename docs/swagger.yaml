@@ -39,7 +39,7 @@ info:
   title: Go Skill
   version: "1.0"
 paths:
-  /skill/createSkill:
+  /createSkill:
     post:
       consumes:
       - application/json
@@ -59,6 +59,37 @@ paths:
             $ref: '#/definitions/db.Skill'
         "400":
           description: We require all fields
+          schema:
+            $ref: '#/definitions/api.ServerError'
+      tags:
+      - skills
+  /getskillbyid/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/db.Skill'
+        "400":
+          description: Something is wrong
+          schema:
+            $ref: '#/definitions/api.ServerError'
+        "404":
+          description: Something is wrong
+          schema:
+            $ref: '#/definitions/api.ServerError'
+        "500":
+          description: Something is wrong
           schema:
             $ref: '#/definitions/api.ServerError'
       tags:

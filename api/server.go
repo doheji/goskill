@@ -15,7 +15,7 @@ type Server struct {
 }
 
 type ServerError struct {
-	error error
+	error error `json:"error"`
 }
 
 func NewServerError(err error) ServerError {
@@ -29,10 +29,11 @@ func NewServer(store *db.Store) *Server {
 	// REGISTER THE ROUTES
 
 	docs.SwaggerInfo.BasePath = "/"
-	v1 := router.Group("/api/v1")
+	v1 := router.Group("/")
 	{
 
 		v1.POST("/createSkill", server.CreateSkillHandler)
+		v1.GET("/getskillbyid/:id", server.GetSkillByIDHandler)
 
 	}
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
@@ -43,8 +44,4 @@ func NewServer(store *db.Store) *Server {
 
 func (s *Server) Start(address string) {
 	log.Fatal(s.router.Run(address))
-}
-
-func errorMessage(e error) gin.H {
-	return gin.H{"error": e.Error()}
 }

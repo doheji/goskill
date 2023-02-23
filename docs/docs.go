@@ -24,7 +24,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/skill/createSkill": {
+        "/createSkill": {
             "post": {
                 "consumes": [
                     "application/json"
@@ -55,6 +55,54 @@ const docTemplate = `{
                     },
                     "400": {
                         "description": "We require all fields",
+                        "schema": {
+                            "$ref": "#/definitions/api.ServerError"
+                        }
+                    }
+                }
+            }
+        },
+        "/getskillbyid/{id}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "skills"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#/definitions/db.Skill"
+                        }
+                    },
+                    "400": {
+                        "description": "Something is wrong",
+                        "schema": {
+                            "$ref": "#/definitions/api.ServerError"
+                        }
+                    },
+                    "404": {
+                        "description": "Something is wrong",
+                        "schema": {
+                            "$ref": "#/definitions/api.ServerError"
+                        }
+                    },
+                    "500": {
+                        "description": "Something is wrong",
                         "schema": {
                             "$ref": "#/definitions/api.ServerError"
                         }
