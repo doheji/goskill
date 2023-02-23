@@ -21,13 +21,17 @@ jobs:
         image: postgres
         # Provide the password for postgres
         env:
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_PASSWORD: secret
+          POSTGRES_DB: go_skill_db
+          POSTGRES_USER: root
         # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        ports:
+          - 1234:5432
 
     steps:
       - uses: actions/checkout@v3
