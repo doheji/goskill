@@ -1,0 +1,1 @@
+ALTER TABLE "Skill" ADD CONSTRAINT UniqueNameSkill UNIQUE ("name", "learner");
