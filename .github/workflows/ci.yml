@@ -42,10 +42,7 @@ jobs:
           go-version: 1.19
 
       - name: Set up swagger
-        run: |
-          go install github.com/swaggo/swag/cmd/swag@latest
-          mv ${GOROOT}/bin/swag ./swag
-          ./swag init
+        run:  ./swag init
 
       - name: Install gomigrate
         run: |
