@@ -44,7 +44,7 @@ jobs:
       - name: Set up swagger
         run: |
           go install github.com/swaggo/swag/cmd/swag@latest
-          mv ${GOBIN}/swag ./swag
+          mv ${GOROOT}/swag ./swag
           ./swag init
 
       - name: Install gomigrate
