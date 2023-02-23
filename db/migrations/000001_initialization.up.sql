@@ -46,4 +46,3 @@ ALTER TABLE "Task" ADD FOREIGN KEY ("skill_id") REFERENCES "Skill" ("id");
 
 ALTER TABLE "Session" ADD FOREIGN KEY ("task_id") REFERENCES "Task" ("id");
 
-ALTER TABLE "Session" ADD FOREIGN KEY ("task_id") REFERENCES "Session" ("duration");
